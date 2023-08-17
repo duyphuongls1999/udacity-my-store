@@ -1,0 +1,31 @@
+<div *ngIf="product" class="container">
+    <img [src]="product.url" [alt]="product.name" />
+
+    <div class="details">
+        <div class="header">
+            <span class="name">
+                {{product.name}}
+            </span>
+        </div>
+
+        <div class="price">
+            <span>{{product.price | currency: "EUR" }}</span>
+        </div>
+        <div class="description">
+            <span>{{product.description}}</span>
+        </div>
+
+        <!-- <button (click)="addToCart()">Add To Cart</button> -->
+
+        <form (ngSubmit)="addProductToCart(product)">
+            <select [(ngModel)]="selectedItem" style="width: 100px" class="product-item-detail form-select" (ngModelChange)="selectedChange($event)" [ngModelOptions]="{ standalone: true }">
+                <option *ngFor="let value of productCount" value="{{ value }}">
+                {{ value }}
+                </option>
+            </select>
+            <!-- <button (click)="addToCart()">Add To Cart</button> -->
+            <input class="btn-add" type="submit" value="Add to Cart"/>
+        </form>
+    </div>
+
+</div>

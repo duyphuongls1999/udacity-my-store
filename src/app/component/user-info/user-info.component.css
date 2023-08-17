@@ -1,0 +1,10 @@
+.user-info{
+    margin: 0 0 0 5rem;
+}
+
+.btn-submit{
+    color: white;
+    background: #04AA6D!important;
+    border-radius: 5px;
+    font-size: 1.2rem; 
+}

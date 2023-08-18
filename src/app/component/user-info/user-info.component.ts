@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-info',
@@ -9,18 +9,36 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UserInfoComponent implements OnInit {
   createForm!: FormGroup;
   submitted = false;
+  numberRegEx = /^\d+$/;
   @Output() userInfo = new EventEmitter();
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.createForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(4)]],
-      address: ['', [Validators.required]],
-      creditCard: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      address: ['', [Validators.required, Validators.minLength(4)]],
+      creditCard: ['', [Validators.required, Validators.pattern(this.numberRegEx), Validators.minLength(8)]],
     });
   }
   onSubmit() {
-    this.userInfo.emit(this.createForm.value);
+    console.log(this.createForm);
+    if (this.createForm.valid) {
+      this.userInfo.emit(this.createForm.value);
+    } else {
+      this.validateAllFormFields(this.createForm);
+    }
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      console.log(field);
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
   }
 
   get firstName() {

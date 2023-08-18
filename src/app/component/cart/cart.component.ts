@@ -24,6 +24,7 @@ export class CartComponent implements OnInit {
 
   onSubmit(value: any) {
     this.cartService.clearCart();
+    this.cartService.calculateCount();
     this.route.navigate([`success/${value.firstName}/${this.totalPrice}`]);
   }
 

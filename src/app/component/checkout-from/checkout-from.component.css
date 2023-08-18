@@ -4,7 +4,7 @@
     justify-content: center;
     margin-top: 8%;
 }
-.confirmation__items {
+.confirmation_items {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,10 +12,10 @@
 i {
     color: #33e5bc;
 }
-.confirmation__title {
+.confirmation_title {
     color: #33e5bc;
     font-size: 30px;
 }
-.confirmation__item {
+.confirmation_item {
     margin-bottom: 30px;
 }

@@ -2,13 +2,13 @@
     <form class="form-group" [formGroup]="createForm" (ngSubmit)="onSubmit()">
         <div>
             <label>Full Name </label><br />
-            <input class="form-control" type="text" formControlName="firstName" placeholder="Enter Full Name" required 
-                [ngClass]="{'is-invalid': submitted && firstName?.touched && firstName?.errors}" />
-            <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="errors-text">
-                <div *ngIf="firstName?.errors?.['required']">
+            <input class="form-control" type="text" formControlName="fullName" placeholder="Enter Full Name" required 
+                [ngClass]="{'is-invalid': submitted && fullName?.touched && fullName?.errors}" />
+            <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)" class="errors-text">
+                <div *ngIf="fullName?.errors?.['required']">
                     Full Name is required.
                 </div>
-                <div *ngIf="firstName?.errors?.['minlength']">
+                <div *ngIf="fullName?.errors?.['minlength']">
                     Name must be at least 2 characters long.
                 </div>
             </div>
@@ -47,7 +47,7 @@
         </div>
 
         <br />
-        <span class="message">We'll never share your payment details with anyone else.</span>
+        <span class="message">We'll never share your payment details with anyone else. </span>
         <button type="submit" class="btn-submit">Submit</button>
     </form>
 </div>

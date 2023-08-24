@@ -1,31 +1,30 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/Product';
 import { CartService } from 'src/app/service/cart/cart.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css'],
+  selector: 'app-cart-page',
+  templateUrl: './cart-page.component.html',
+  styleUrls: ['./cart-page.component.css']
 })
-export class CartComponent implements OnInit {
-  cartProducts: Product[] = [];
+export class CartPageComponent  implements OnInit {
+  products: Product[] = [];
   @Output() userInfo = new EventEmitter();
   totalPrice: number | string = '';
-  productCount: string[] = ['1', '2', '3', '4', '5'];
+  productCounts: string[] = ['1', '2', '3', '4', '5'];
   selectedItem = '';
   constructor(private cartService: CartService, private route: Router) {}
 
   ngOnInit(): void {
-    this.cartProducts = this.cartService.getCartProduct();
+    this.products = this.cartService.getCartProduct();
     this.calculateTotal();
   }
 
   onSubmit(value: any) {
     this.cartService.clearCart();
     this.cartService.calculateCount();
-    this.route.navigate([`success/${value.firstName}/${this.totalPrice}`]);
+    this.route.navigate([`checkout-page/${value.fullName}/${this.totalPrice}`]);
   }
 
   refresh(): void {
@@ -33,16 +32,16 @@ export class CartComponent implements OnInit {
   }
 
   selectChange(value: string, product: Product) {
-    const index = this.cartProducts.indexOf(product);
-    this.cartProducts[index] = product;
-    this.cartProducts[index].amount = value;
-    localStorage.setItem('products', JSON.stringify(this.cartProducts));
+    const index = this.products.indexOf(product);
+    this.products[index] = product;
+    this.products[index].amount = value;
+    localStorage.setItem('products', JSON.stringify(this.products));
     this.calculateTotal();
     this.refresh();
   }
 
   calculateTotal() {
-    this.totalPrice = this.cartProducts.reduce((acc, item) => {
+    this.totalPrice = this.products.reduce((acc, item) => {
       this.totalPrice = parseFloat(
         (acc + item.price * Number(item.amount)).toFixed(2)
       );
@@ -61,3 +60,4 @@ export class CartComponent implements OnInit {
     this.calculateTotal();
   }
 }
+

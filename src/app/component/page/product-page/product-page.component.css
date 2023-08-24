@@ -1,4 +1,4 @@
-.container{
+.product-page{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     margin: 3rem;
 }
 
-.container > *{
+.product-page > *{
  min-width: 25rem;
  max-width: 40rem;
 }
@@ -15,7 +15,7 @@ img{
     border-radius: 3rem;
     flex:1 0;
     object-fit: cover;
-    height: 35rem;
+    height: 40rem;
     margin: 1rem;
 }
 

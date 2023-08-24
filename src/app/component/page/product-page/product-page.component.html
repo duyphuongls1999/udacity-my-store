@@ -1,4 +1,4 @@
-<div *ngIf="product" class="container">
+<div *ngIf="product" class="product-page">
     <img [src]="product.url" [alt]="product.name" />
 
     <div class="details">
@@ -17,7 +17,7 @@
 
         <form (ngSubmit)="addProductToCart(product)">
             <select [(ngModel)]="selectedItem" style="width: 100px" class="product-item-detail form-select" (ngModelChange)="selectedChange($event)" [ngModelOptions]="{ standalone: true }">
-                <option *ngFor="let value of productCount" value="{{ value }}">
+                <option *ngFor="let value of productCounts" value="{{ value }}">
                 {{ value }}
                 </option>
             </select>

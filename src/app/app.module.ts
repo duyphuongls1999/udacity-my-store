@@ -5,23 +5,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './component/header/header.component';
-import { CheckoutFromComponent } from './component/checkout-from/checkout-from.component';
-import { ProductComponent } from './component/product/product.component';
-import { CartComponent } from './component/cart/cart.component';
-import { UserInfoComponent } from './component/user-info/user-info.component';
+import { HeaderComponent } from './component/partials/header/header.component';
+import { UserInfoComponent } from './component/partials/user-info/user-info.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { HomeComponent } from './component/home/home.component';
+import { CartPageComponent } from './component/page/cart-page/cart-page.component';
+import { ProductPageComponent } from './component/page/product-page/product-page.component';
+import { CheckoutPageComponent } from './component/page/checkout-page/checkout-page.component';
+import { HomePageComponent } from './component/page/home-page/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CheckoutFromComponent,
-    CartComponent,
-    ProductComponent,
     UserInfoComponent,
-    HomeComponent,
+    CartPageComponent,
+    HomePageComponent,
+    ProductPageComponent,
+    CheckoutPageComponent,
   ],
   imports: [
     BrowserModule,

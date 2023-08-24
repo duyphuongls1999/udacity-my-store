@@ -1,21 +1,18 @@
-.confirmation {
+.checkout-page {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 8%;
 }
-.confirmation_items {
+.items {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-i {
-    color: #33e5bc;
-}
-.confirmation_title {
+.title {
     color: #33e5bc;
     font-size: 30px;
 }
-.confirmation_item {
+.item {
     margin-bottom: 30px;
 }

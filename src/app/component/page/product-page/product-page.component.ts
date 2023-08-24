@@ -5,14 +5,13 @@ import { ProductService } from 'src/app/service/product/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'app-product-page',
+  templateUrl: './product-page.component.html',
+  styleUrls: ['./product-page.component.css']
 })
-
-export class ProductComponent implements OnInit {
+export class ProductPageComponent implements OnInit {
   product!: Product;
-  productCount: string[] = ['1', '2', '3', '4', '5'];
+  productCounts: string[] = ['1', '2', '3', '4', '5'];
   selectedItem = '1';
   constructor(private activatedRoute: ActivatedRoute,
     private productService: ProductService,
@@ -43,10 +42,9 @@ export class ProductComponent implements OnInit {
       const message = `${product.name} has been added to your cart.`;
       alert(message);
     }
-    this.router.navigate(['/cart']);
+    this.router.navigate(['/cart-page']);
     this.cartService.calculateCount();
   }
 
 
 }
-

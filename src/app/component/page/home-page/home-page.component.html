@@ -1,5 +1,6 @@
 <ul>
-    <li *ngFor="let product of products">
+    <!-- <li *ngFor="let product of products" > -->
+    <app-product *ngFor="let product of products" [productItem]="product">
         <a routerLink="/product-page/{{product.id}}">
             <img src="{{product.url}}" alt="">
             <div class="content">
@@ -18,5 +19,6 @@
                 </div>
             </div>
         </a>
-    </li>
+    </app-product>
+    <!-- </li> -->
 </ul>

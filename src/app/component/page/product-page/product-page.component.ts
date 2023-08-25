@@ -1,29 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/Product';
 import { CartService } from 'src/app/service/cart/cart.service';
 import { ProductService } from 'src/app/service/product/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.css']
+  styleUrls: ['./product-page.component.css'],
 })
 export class ProductPageComponent implements OnInit {
-  product!: Product;
+  @Input() productItem!: Product;
+  private ngUnsubscribe = new Subject<void>();
   productCounts: string[] = ['1', '2', '3', '4', '5'];
   selectedItem = '1';
-  constructor(private activatedRoute: ActivatedRoute,
+  products!: Product[];
+  // product!: Product;
+  id!: number;
+  constructor(
+    private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private router: Router) { 
-    activatedRoute.params.subscribe((params) => {
-      if(params['id'])
-      this.product = productService.getProductByID(params['id']);
-    });
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.id = Number(params.get('id'));
+    });
+    this.productService
+      .getAllProduct()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (res) => {
+          this.products = res;
+          this.productItem = this.getProductDetails(this.id);
+        },
+        error: (err) => console.log(err),
+      });
+  }
+
+  getProductDetails(id: any) {
+    return this.products.filter((item) => item.id === id)[0];
   }
 
   selectedChange(value: any) {
@@ -45,6 +64,4 @@ export class ProductPageComponent implements OnInit {
     this.router.navigate(['/cart-page']);
     this.cartService.calculateCount();
   }
-
-
 }

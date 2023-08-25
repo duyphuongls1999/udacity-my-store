@@ -6,9 +6,9 @@ import { CartService } from 'src/app/service/cart/cart.service';
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
-  styleUrls: ['./cart-page.component.css']
+  styleUrls: ['./cart-page.component.css'],
 })
-export class CartPageComponent  implements OnInit {
+export class CartPageComponent implements OnInit {
   products: Product[] = [];
   @Output() userInfo = new EventEmitter();
   totalPrice: number | string = '';
@@ -51,13 +51,17 @@ export class CartPageComponent  implements OnInit {
 
   deletedItem(id: number) {
     const storageProducts = this.cartService.getCartProduct();
+    const product = storageProducts.filter(
+      (product: Product) => product.id === id
+    );
     const products = storageProducts.filter(
       (product: Product) => product.id !== id
     );
+    const message = `${product[0].name} has been removed to your cart.`;
+    alert(message);
     window.localStorage.clear();
     localStorage.setItem('products', JSON.stringify(products));
     this.refresh();
     this.calculateTotal();
   }
 }
-

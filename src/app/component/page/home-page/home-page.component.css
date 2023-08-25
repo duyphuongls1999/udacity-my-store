@@ -7,7 +7,7 @@ ul{
     padding: 0;
 }
 
-ul li a{
+ul app-product a{
     height: 55rem;
     width: 30rem;
     border: 1px solid whitesmoke;
@@ -18,7 +18,7 @@ ul li a{
     overflow: hidden;
     color: #e72929;
 }
-li a:hover{
+app-product a:hover{
     opacity: 0.9;
     cursor: pointer;
 }

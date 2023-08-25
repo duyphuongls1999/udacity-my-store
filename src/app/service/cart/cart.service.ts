@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/model/Product';
+import { ProductService } from '../product/product.service';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,9 @@ import { Product } from 'src/app/model/Product';
 export class CartService {
   storage = window.localStorage;
   cartProductList!: Product[];
+  selectedItem = '1';
+
+  constructor(private productService: ProductService){}
 
   getCartProduct() {
     const getProduct = this.storage.getItem('products');
